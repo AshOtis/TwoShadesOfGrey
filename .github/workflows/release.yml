@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check tag matches manifest version
+        run: |
+          version="$(jq -r .version manifest.json)"
+          if [ "${GITHUB_REF_NAME}" != "${version}" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match manifest.json version ${version}"
+            exit 1
+          fi
+
+      - name: Publish release with install files attached
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh release view "${GITHUB_REF_NAME}" > /dev/null 2>&1; then
+            gh release upload "${GITHUB_REF_NAME}" manifest.json theme.css --clobber
+          else
+            gh release create "${GITHUB_REF_NAME}" manifest.json theme.css \
+              --title "${GITHUB_REF_NAME}" \
+              --notes "TwoShadesOfGrey ${GITHUB_REF_NAME}"
+          fi
+
+      - name: Verify install files download from the release
+        run: |
+          url="https://github.com/${GITHUB_REPOSITORY}/releases/download/${GITHUB_REF_NAME}"
+          curl -fsSL --retry 5 --retry-delay 5 -o /dev/null "${url}/manifest.json"
+          curl -fsSL --retry 5 --retry-delay 5 -o /dev/null "${url}/theme.css"
