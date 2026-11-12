@@ -151,8 +151,8 @@ body {
 }
 
 /* Hide the Help button (bottom of the left sidebar) */
-.workspace-drawer-vault-actions .clickable-icon:has(svg.help, .lucide-help-circle, .lucide-circle-help),
-.workspace-sidedock-vault-profile .clickable-icon:has(svg.help, .lucide-help-circle, .lucide-circle-help) {
+.workspace-drawer-vault-actions .clickable-icon[aria-label="Help"],
+.workspace-sidedock-vault-profile .clickable-icon[aria-label="Help"] {
   display: none;
 }
 
