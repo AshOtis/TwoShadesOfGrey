@@ -1,0 +1,164 @@
+/* TwoShadesOfGrey — an Obsidian theme by AshOtis.
+ * Two flat greys and one blue: a mid-dark grey (#666666) for dark mode,
+ * a mid-light grey (#b1b1b1) for light mode. No glow, no glass, no texture.
+ * Ported from Format.css (originally written against Logseq's --ls-* variables). */
+
+/* =========================
+   ACCENT (shared)
+========================= */
+
+body {
+  /* #4f9cff */
+  --accent-h: 214;
+  --accent-s: 100%;
+  --accent-l: 65%;
+
+  --code-radius: 6px;
+  --text-on-accent: #f2f2f2;
+}
+
+/* =========================
+   DARK THEME — the dark grey
+========================= */
+
+.theme-dark {
+  /* Grey scale. 00–25 are surfaces, 30–40 are controls, 50–100 are text. */
+  --color-base-00: #666666;  /* primary background */
+  --color-base-05: #4d4d4d;  /* tertiary: deepest surface */
+  --color-base-10: #5f5f5f;
+  --color-base-20: #5a5a5a;  /* secondary: sidebars, tab bar, ribbon */
+  --color-base-25: #545454;
+  --color-base-30: #757575;
+  --color-base-35: #808080;
+  --color-base-40: #8c8c8c;
+  --color-base-50: #a0a0a0;
+  --color-base-60: #aaaaaa;
+  --color-base-70: #b4b4b4;
+  --color-base-100: #c4c4c4; /* body text — toned down from #d4d4d4 */
+
+  --background-primary: #666666;
+  --background-primary-alt: #5f5f5f;
+  --background-secondary: #5a5a5a;
+  --background-secondary-alt: #4d4d4d;
+
+  --text-normal: #c4c4c4;
+  --text-muted: #b4b4b4;
+  --text-faint: #a0a0a0;
+
+  --background-modifier-border: rgba(255, 255, 255, 0.1);
+  --background-modifier-border-hover: rgba(255, 255, 255, 0.16);
+  --background-modifier-border-focus: rgba(255, 255, 255, 0.24);
+  --background-modifier-hover: rgba(255, 255, 255, 0.06);
+  --background-modifier-active-hover: rgba(79, 156, 255, 0.18);
+  --background-modifier-form-field: #5a5a5a;
+  --divider-color: rgba(255, 255, 255, 0.1);
+
+  --text-accent: #82b1ff;
+  --text-accent-hover: #a6c8ff;
+  --text-selection: rgba(79, 156, 255, 0.45);
+
+  --code-background: #4d4d4d;
+}
+
+/* =========================
+   LIGHT THEME — the light grey
+========================= */
+
+.theme-light {
+  --color-base-00: #bebebe;  /* buttons, dropdowns */
+  --color-base-05: #c3c3c3;
+  --color-base-10: #c8c8c8;  /* button hover */
+  --color-base-20: #a6a6a6;  /* secondary: sidebars, tab bar, ribbon, top frame */
+  --color-base-25: #c4c4c4;
+  --color-base-30: #a0a0a0;
+  --color-base-35: #969696;
+  --color-base-40: #8a8a8a;
+  --color-base-50: #666666;
+  --color-base-60: #5c5c5c;
+  --color-base-70: #555555;
+  --color-base-100: #434343;
+
+  --background-primary: #b1b1b1;
+  --background-primary-alt: #a9a9a9;
+  --background-secondary: #a6a6a6;
+  --background-secondary-alt: #9b9b9b;
+
+  --text-normal: #434343;
+  --text-muted: #505050;
+  --text-faint: #5e5e5e;
+
+  --background-modifier-border: rgba(0, 0, 0, 0.1);
+  --background-modifier-border-hover: rgba(0, 0, 0, 0.18);
+  --background-modifier-border-focus: rgba(0, 0, 0, 0.28);
+  --background-modifier-hover: rgba(0, 0, 0, 0.06);
+  --background-modifier-active-hover: rgba(79, 156, 255, 0.2);
+  --background-modifier-form-field: #bebebe;
+  --interactive-normal: #bebebe;
+  --interactive-hover: #c8c8c8;
+  --divider-color: rgba(0, 0, 0, 0.1);
+
+  /* The source blue (#4f9cff) is nearly invisible as text on #b1b1b1,
+     so links use a deeper shade of the same hue. */
+  --text-accent: #1d56b3;
+  --text-accent-hover: #123f8a;
+  --text-selection: rgba(79, 156, 255, 0.45);
+
+  --code-background: #eaeaea;
+}
+
+/* =========================
+   GLOBAL STYLING
+========================= */
+
+.theme-dark,
+.theme-light {
+  /* Headings and the page title take the body text colour */
+  --h1-color: var(--text-normal);
+  --h2-color: var(--text-normal);
+  --h3-color: var(--text-normal);
+  --h4-color: var(--text-normal);
+  --h5-color: var(--text-normal);
+  --h6-color: var(--text-normal);
+  --inline-title-color: var(--text-normal);
+
+  /* Links, tags */
+  --link-color: var(--text-accent);
+  --link-color-hover: var(--text-accent-hover);
+  --link-external-color: var(--text-accent);
+  --link-external-color-hover: var(--text-accent-hover);
+  --tag-color: var(--text-accent);
+  --tag-color-hover: var(--text-accent-hover);
+
+  /* Bullet points in the accent blue */
+  --list-marker-color: var(--text-accent);
+  --list-marker-color-hover: var(--text-accent-hover);
+  --list-marker-color-collapsed: var(--text-accent-hover);
+
+  /* Code */
+  --code-normal: var(--text-normal);
+}
+
+/* Inline code: a little breathing room, as in the source */
+.markdown-rendered :not(pre) > code,
+.cm-s-obsidian span.cm-inline-code:not(.cm-formatting) {
+  padding: 2px 6px;
+}
+
+/* No rule under headings or between blocks */
+.markdown-rendered h1,
+.markdown-rendered h2 {
+  border-bottom: none;
+}
+
+/* Hide the Help button (bottom of the left sidebar) */
+.workspace-drawer-vault-actions .clickable-icon:has(svg.help, .lucide-help-circle, .lucide-circle-help),
+.workspace-sidedock-vault-profile .clickable-icon:has(svg.help, .lucide-help-circle, .lucide-circle-help) {
+  display: none;
+}
+
+/* Settings window: the left-hand list takes the sidebar shade */
+.modal.mod-settings .vertical-tab-header,
+.modal.mod-sidebar-layout .vertical-tab-header {
+  background-color: var(--background-secondary);
+  border-right: 1px solid var(--background-modifier-border);
+}
